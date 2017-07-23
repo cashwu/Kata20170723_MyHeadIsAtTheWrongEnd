@@ -15,6 +15,12 @@ namespace Kata20170723_MyHeadIsAtTheWrongEnd
             AssertFixTheMeerkatShouldBe(new[] { "tail", "body", "head" }, new[] { "head", "body", "tail" });
         }
 
+        [TestMethod]
+        public void Input_tails_body_heads_Should_Return_heads_body_tails()
+        {
+            AssertFixTheMeerkatShouldBe(new[] { "tails", "body", "heads" }, new[] { "heads", "body", "tails" });
+        }
+
         private static void AssertFixTheMeerkatShouldBe(string[] source, string[] expected)
         {
             var kata = new Kata();
@@ -31,13 +37,14 @@ namespace Kata20170723_MyHeadIsAtTheWrongEnd
 
             foreach (var item in arr.ToList())
             {
-                if (item == "tail")
+                if (item.StartsWith("tail"))
                 {
-                    result.Insert(1, "tail");
+                    result.Insert(1, item);
                 }
-                if (item == "head")
+
+                if (item.StartsWith("head"))
                 {
-                    result.Insert(0, "head");
+                    result.Insert(0, item);
                 }
             }
 
