@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace Kata20170723_MyHeadIsAtTheWrongEnd
 {
@@ -21,6 +19,18 @@ namespace Kata20170723_MyHeadIsAtTheWrongEnd
             AssertFixTheMeerkatShouldBe(new[] { "tails", "body", "heads" }, new[] { "heads", "body", "tails" });
         }
 
+        [TestMethod]
+        public void Input_bottom_middle_top_Should_Return_top_middle_bottom()
+        {
+            AssertFixTheMeerkatShouldBe(new[] { "bottom", "middle", "top" }, new[] { "top", "middle", "bottom" });
+        }
+
+        [TestMethod]
+        public void Input_lowerlegs_torso_upperlegs_Should_Return_upperlegs_torso_lowerlegs()
+        {
+            AssertFixTheMeerkatShouldBe(new[] { "lower legs", "torso", "upper legs" }, new[] { "upper legs", "torso", "lower legs" });
+        }
+
         private static void AssertFixTheMeerkatShouldBe(string[] source, string[] expected)
         {
             var kata = new Kata();
@@ -33,21 +43,25 @@ namespace Kata20170723_MyHeadIsAtTheWrongEnd
     {
         public string[] FixTheMeerkat(string[] arr)
         {
-            var result = new List<string> { "body" };
+            var middleContext = new[] { "body", "middle", "torso" };
+            var topContext = new[] { "head", "top", "upper" };
+            var botttomContext = new[] { "tail", "bottom", "lower" };
+
+            var result = arr.Where(a => middleContext.Contains(a)).ToList();
 
             foreach (var item in arr.ToList())
             {
-                if (item.StartsWith("tail"))
-                {
-                    result.Insert(1, item);
-                }
-
-                if (item.StartsWith("head"))
+                if (topContext.Any(a => item.StartsWith(a)))
                 {
                     result.Insert(0, item);
                 }
-            }
 
+                if (botttomContext.Any(a => item.StartsWith(a)))
+                {
+                    result.Insert(1, item);
+                }
+            }
+            
             return result.ToArray();
         }
     }
