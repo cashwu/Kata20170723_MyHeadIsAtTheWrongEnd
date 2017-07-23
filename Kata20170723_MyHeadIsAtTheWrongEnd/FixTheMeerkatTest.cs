@@ -10,18 +10,6 @@ namespace Kata20170723_MyHeadIsAtTheWrongEnd
     public class FixTheMeerkatTest
     {
         [TestMethod]
-        public void Input_tail_body_Should_Return_body_tail()
-        {
-            AssertFixTheMeerkatShouldBe(new[] {"tail", "body"}, new[] {"body", "tail"});
-        }
-
-        [TestMethod]
-        public void Input_body_head_Should_Return_head_body()
-        {
-            AssertFixTheMeerkatShouldBe(new[] { "body", "head" }, new[] { "head", "body" });
-        }
-
-        [TestMethod]
         public void Input_tail_body_head_Should_Return_head_body_tail()
         {
             AssertFixTheMeerkatShouldBe(new[] { "tail", "body", "head" }, new[] { "head", "body", "tail" });
