@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace Kata20170723_MyHeadIsAtTheWrongEnd
 {
@@ -31,6 +32,12 @@ namespace Kata20170723_MyHeadIsAtTheWrongEnd
             AssertFixTheMeerkatShouldBe(new[] { "lower legs", "torso", "upper legs" }, new[] { "upper legs", "torso", "lower legs" });
         }
 
+        [TestMethod]
+        public void Input_sky_rainbow_ground_Return_ground_rainbow_sky()
+        {
+            AssertFixTheMeerkatShouldBe(new[] { "sky", "rainbow", "ground" }, new[] { "ground", "rainbow", "sky" });
+        }
+
         private static void AssertFixTheMeerkatShouldBe(string[] source, string[] expected)
         {
             var kata = new Kata();
@@ -43,26 +50,7 @@ namespace Kata20170723_MyHeadIsAtTheWrongEnd
     {
         public string[] FixTheMeerkat(string[] arr)
         {
-            var middleContext = new[] { "body", "middle", "torso" };
-            var topContext = new[] { "head", "top", "upper" };
-            var botttomContext = new[] { "tail", "bottom", "lower" };
-
-            var result = arr.Where(a => middleContext.Contains(a)).ToList();
-
-            foreach (var item in arr.ToList())
-            {
-                if (topContext.Any(a => item.StartsWith(a)))
-                {
-                    result.Insert(0, item);
-                }
-
-                if (botttomContext.Any(a => item.StartsWith(a)))
-                {
-                    result.Insert(1, item);
-                }
-            }
-            
-            return result.ToArray();
+            return new []{ arr[2], arr[1], arr[0] };
         }
     }
 }
